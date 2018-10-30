@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System;
+using System.Security.Cryptography.X509Certificates;
 
 namespace TODOConsoleApp
 {
@@ -8,16 +9,16 @@ namespace TODOConsoleApp
         public TaskModel(string descryption, string startDate, string endDate, string allDayTask, string importantTask )
         {
             Descryption = descryption;
-            StartDate = startDate;
-            EndDate = endDate;
+            StartDate = DateTime.Parse(startDate);
+            EndDate = DateTime.Parse(endDate);
             AllDayTask = allDayTask;
             ImportantTask = importantTask;
 
         }
 
         public string Descryption { get; set; }
-        public string StartDate { get; set; }
-        public string EndDate { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public string AllDayTask { get; set; }
         public string ImportantTask { get; set; }
         

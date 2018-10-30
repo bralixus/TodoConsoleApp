@@ -20,52 +20,66 @@ namespace TODOConsoleApp
             Console.WriteLine();
             do
             {
+                Console.WriteLine("Jeśli chcesz dodać nowe zadanie, wpisz \"dodaj\"");
+                Console.WriteLine("Jeśli chcesz opuścić program, wpisz \"exit\"");
+                string task = Console.ReadLine();
+                if (task == "dodaj")
+                {
+                    Console.WriteLine("Wpisz nowe zadanie (opis;data rozpoczęcia;data zakończenia;ważność zadania");
+                }
+
+
                 Console.Write("Podaj opis zadania: ");
                 string descryption = Console.ReadLine();
                 Console.Write("Podaj datę rozpoczęcia zadania (rrrr.mm.dd): ");
                 string startDate = Console.ReadLine();
                 if (startDate != null)
                 {
-                    string[] date = startDate.Split('.');
-                    if(Date.DateCheck(int.Parse(date[0]), int.Parse(date[1]), int.Parse(date[2])) == false)
+                    string[] date1 = startDate.Split('.');
+                    if(Date.DateCheck(int.Parse(date1[0]), int.Parse(date1[1]), int.Parse(date1[2])))
+                    {
+                        Console.Write("Podaj datę zakończenia zadania zadania (rrrr.mm.dd): ");
+                        string endDate = Console.ReadLine();//tu trzeba inaczej
+                        if (endDate!=null)
+                        {
+                            string allDayTask = null;
+                            string[] date = startDate.Split('.');
+                            if (Date.DateCheck(int.Parse(date[0]), int.Parse(date[1]), int.Parse(date[2])) != false)
+                            {
+                                //iść dalej
+                            }
+                            Console.WriteLine("Nieprawidłowy format daty");
+
+                        }
+                        else
+                        {
+                            string allDayTask = "tak";
+                            Console.Write("Nie podano daty końcowej. Zostanie dodane zadanie całodniowe.");
+                        }
+
+                        Console.Write("Jeśli zadanie jest ważne wpisz \"tak\"");
+                        string importantTask = Console.ReadLine();
+                        Console.WriteLine();
+                        Console.WriteLine("Jeśli chcesz dodać kolejne zadanie wciśnij enter.");
+                        Console.WriteLine("Jeśli chcesz zapisać zadanie wpisz \"add\".");
+                        if (Console.ReadLine() == "add")
+                        {
+                            AddTask(descryption, startDate, endDate, allDayTask, importantTask);
+                        }
+                        Console.WriteLine("Jeśli chcesz zakończyć wpisz \"exit\"");
+                        Console.ReadLine();
+                    } while (Console.ReadLine() != "exit") ;
+                
+                    else
                     {
                         Console.WriteLine("Nieprawidłowy format daty");
                     }
-                    
                 }
                 else
                 {
                     Console.WriteLine("Nieprawidłowy format daty");
                 }
-                Console.Write("Podaj datę zakończenia zadania zadania (rrrr.mm.dd): ");
-                string endDate = Console.ReadLine();
-                if (endDate != null)
-                {
-                    string[] date = startDate.Split('.');
-                    if (Date.DateCheck(int.Parse(date[0]), int.Parse(date[1]), int.Parse(date[2])) == false)
-                    {
-                        Console.WriteLine("Nieprawidłowy format daty");
-                    }
-
-                }
-                else
-                {
-                    Console.Write("Podaj, czy jest to zadanie całodniowe (tak/nie): ");
-                    string allDayTask = Console.ReadLine();
-                }
                 
-                Console.Write("Jeśli zadanie jest ważne wpisz \"tak\"");
-                string importantTask = Console.ReadLine();
-                Console.WriteLine();
-                Console.WriteLine("Jeśli chcesz dodać kolejne zadanie wciśnij enter.");
-                Console.WriteLine("Jeśli chcesz zapisać zadanie wpisz \"add\".");
-                if (Console.ReadLine() == "add")
-                {
-                    AddTask(descryption, startDate, endDate, allDayTask, importantTask);
-                }
-                Console.WriteLine("Jeśli chcesz zakończyć wpisz \"exit\"");
-                Console.ReadLine();
-            } while (Console.ReadLine() != "exit");
 
             
 
