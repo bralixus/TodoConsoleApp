@@ -11,10 +11,12 @@ namespace TODOConsoleApp
 {
     class Program
     {
+        public static List<TaskModel> taskList = new List<TaskModel>();
+
         static void Main(string[] args)
         {
             
-            List< TaskModel> taskList = new List<TaskModel>();
+            
 
 
             Console.WriteLine("MENEDŻER ZADAŃ TODO");
@@ -42,14 +44,15 @@ namespace TODOConsoleApp
                 Console.ReadLine();
             } while (Console.ReadLine() != "exit");
 
-            string AddTask(string descryption, string startDate, string endDate, string allDayTask, string importantTask)
-            {
-                TaskModel taskModel = new TaskModel(descryption, startDate, endDate, allDayTask, importantTask);
-
-                return taskList.Add(taskModel.Descryption, taskModel.StartDate,taskModel.EndDate, taskModel.AllDayTask, taskModel.ImportantTask);
-            }
+            
 
 
+        }
+        public static void AddTask(string descryption, string startDate, string endDate, string allDayTask, string importantTask)
+        {
+            TaskModel taskModel = new TaskModel(descryption, startDate, endDate, allDayTask, importantTask);
+
+            taskList.Add(taskModel);
         }
     }
 }
