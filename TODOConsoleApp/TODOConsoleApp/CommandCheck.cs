@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 
@@ -10,83 +11,91 @@ public static class CommandCheck
 
     public static string elements(string element)
     {
+        
         string[] everyElement = element.Split(';');
-
-        if (everyElement.Length == 2)
+        List<string> elements1 = everyElement.ToList();
+        string[] startDate = everyElement[1].Split('.');
+        if (startDate[0].Length == 4 && startDate[1].Length == 2 && startDate[2].Length == 2 && DateCheck(
+                int.Parse(startDate[0]), int.Parse(startDate[1]),
+                int.Parse(startDate[2])) == true)
         {
-            List<string> elements = everyElement.ToList();
-
-            string[] date = everyElement[1].Split('.');
-            
-            if (DateCheck(int.Parse(date[0]), int.Parse(date[1]), int.Parse(date[2].Trim(';',' '))) == true)
+            if (everyElement.Length == 2)
             {
-                    elements[3] = "true";
-                    elements.Add("");
-                    StringBuilder sb = new StringBuilder();
-                    sb.Append(elements[0] + ";");
-                    sb.Append(elements[1] + ";");
-                    sb.Append(elements[2] + ";");
-                    sb.Append(elements[3] + ";");
-                    sb.Append(elements[4] + ";");
-                    return sb.ToString();
-                
-
-            }
-            return("Błędny format daty rozpoczęcia");
-        }
-
-        if (everyElement.Length == 3)
-        {
-            List<string> elements = everyElement.ToList();
-            string[] date = everyElement[2].Split('.');
-            if (DateCheck(int.Parse(date[0]), int.Parse(date[1]), int.Parse(date[2].Trim(';', ' '))) == true)
-            {
-                string[] dateEnd = everyElement[2].Split('.');
-                if (DateCheck(int.Parse(dateEnd[0]), int.Parse(dateEnd[1]), int.Parse(dateEnd[2].Trim(';', ' '))) ==
-                    true)
-                { 
-                    elements[3] = "";
-                    elements.Add("");
+                elements1.Add("");
+                elements1.Add("true");
+                elements1.Add("");
                 StringBuilder sb = new StringBuilder();
-                sb.Append(elements[0] + ";");
-                sb.Append(elements[1] + ";");
-                sb.Append(elements[2] + ";");
-                sb.Append(elements[3] + ";");
-                sb.Append(elements[4] + ";");
+                sb.Append(elements1[0] + ";");
+                sb.Append(elements1[1] + ";");
+                sb.Append(elements1[2] + ";");
+                sb.Append(elements1[3] + ";");
+                sb.Append(elements1[4] + ";");
                 return sb.ToString();
-                }
-                return ("Błędny format daty zakończenia");
+
             }
-            return("Błędny format daty zakończenia");
-        }
 
-        if (everyElement.Length == 4)
-        {
-
-            List<string> elements = everyElement.ToList();
-            string[] date = everyElement[2].Split('.');
-            if (DateCheck(int.Parse(date[0]), int.Parse(date[1]), int.Parse(date[2].Trim(';', ' '))) == true)
+            if (everyElement.Length == 3)
             {
-                string[] dateEnd = everyElement[2].Split('.');
-                if (DateCheck(int.Parse(dateEnd[0]), int.Parse(dateEnd[1]), int.Parse(dateEnd[2].Trim(';', ' '))) ==
+                if (everyElement[2] == "tak")
+                {
+                    elements1[2] = "";
+                    elements1[3] = "true";
+                    elements1[4] = "true";
+                    
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append(elements1[0] + ";");
+                    sb.Append(elements1[1] + ";");
+                    sb.Append(elements1[2] + ";");
+                    sb.Append(elements1[3] + ";");
+                    sb.Append(elements1[4] + ";");
+                    return sb.ToString();
+                }
+                else
+                {
+                    string[] endDate = everyElement[2].Split('.');
+                    if (endDate[0].Length == 4 && endDate[1].Length == 2 && endDate[2].Length == 2 &&
+                        DateCheck(int.Parse(endDate[0]), int.Parse(endDate[1]), int.Parse(endDate[2])) ==
+                        true)
+                    {
+                        elements1.Add("");
+                        elements1.Add("");
+                        StringBuilder sb = new StringBuilder();
+                        sb.Append(elements1[0] + ";");
+                        sb.Append(elements1[1] + ";");
+                        sb.Append(elements1[2] + ";");
+                        sb.Append(elements1[3] + ";");
+                        sb.Append(elements1[4] + ";");
+                        return sb.ToString();
+                    }
+                }
+
+                return ("Błędny format daty zakończenia");
+
+            }
+
+            if (everyElement.Length == 4)
+            {
+                string[] endDate = everyElement[2].Split('.');
+                if (endDate[0].Length == 4 && endDate[1].Length == 2 && endDate[2].Length == 2 &&
+                    DateCheck(int.Parse(endDate[0]), int.Parse(endDate[1]), int.Parse(endDate[2])) ==
                     true)
                 {
-                    elements[3] = "";
-                    elements.Add("true");
+                    elements1[3] = "";
+                    elements1.Add("true");
                     StringBuilder sb = new StringBuilder();
-                    sb.Append(elements[0] + ";");
-                    sb.Append(elements[1] + ";");
-                    sb.Append(elements[2] + ";");
-                    sb.Append(elements[3] + ";");
-                    sb.Append(elements[4] + ";");
+                    sb.Append(elements1[0] + ";");
+                    sb.Append(elements1[1] + ";");
+                    sb.Append(elements1[2] + ";");
+                    sb.Append(elements1[3] + ";");
+                    sb.Append(elements1[4] + ";");
                     return sb.ToString();
                 }
                 return ("Błędny format daty zakończenia");
+
             }
-            return ("Błędny format daty rozpoczęcia");
 
         }
-        return ("Błędne dane");
+        return ("Błędny format daty rozpoczęcia");
     }
 
     public static bool DateCheck(int year, int month, int day)

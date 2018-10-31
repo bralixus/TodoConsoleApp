@@ -27,18 +27,7 @@ namespace TODOConsoleApp
         
         public DateTime EndDate { get; set; }
 
-        public bool AllDayTask
-        {
-            get { return _allDayTask;}
-            set
-            {
-                if (_endDate == null)
-                {
-                    _allDayTask = true;
-                }
-                
-            }
-        }
+        public bool AllDayTask { get; set; }
         
         public bool ImportantTask { get; set; }
     }

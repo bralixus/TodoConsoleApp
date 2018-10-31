@@ -26,65 +26,49 @@ namespace TODOConsoleApp
                 string start = Console.ReadLine();
                 if (start == "dodaj")
                 {
-                    Console.WriteLine(
-                        "Wpisz nowe zadanie (opis;początek(rrrr.mm.dd);koniec(rrrr.mm.dd); wpisz \"tak\" jeżeli zadanie jest ważne ");
+                    Console.WriteLine("Wpisz nowe zadanie (opis;początek(rrrr.mm.dd);koniec(rrrr.mm.dd); wpisz \"tak\" jeżeli zadanie jest ważne ");
                     string element = Console.ReadLine();
-                    Console.WriteLine(CommandCheck.elements(element));
-                    
+                    string afterCheck = CommandCheck.elements(element.Trim(';', ' ', '=', '-', '.'));
 
-
-//                    if (everyElement[2] != null)
-//                    {
-//                        string[] dateEnd = everyElement[2].Split('.');
-//                        if (Date.DateCheck(int.Parse(dateEnd[0]), int.Parse(dateEnd[1]),
-//                                int.Parse(dateEnd[2])) == true)
-//                        {
-//                            Console.WriteLine("Jeżeli chcesz dodać zadanie do listy wpisz \"add\"");
-//                            if (Console.ReadLine() == "add")
-//                            {
-//                                AddTask(element);
-
-//                            }
-//                        }
-
-//                        Console.WriteLine("Błędny format daty zakończenia");
-//                    }
-//                    else
-//                    {
-//                        //everyElement[3] = true;
-//                    }
-//                }
-
-//                Console.WriteLine("Błędny format daty rozpoczęcia");
-//            }
-
-//                    if (start == "exit")
-//            {
-//                return;
-//            }
-
-//        }
-
-//    } while (true);
-
-//        }
-//public static void AddTask(string newTask)
-//{
-//    string[] testField = newTask.Split(';');
-
-//    TaskModel taskModel =
-//        new TaskModel(testField[0], testField[1], testField[2], testField[3], testField[4]);
-
-//    taskList.Add(taskModel);
-
-//}
-
-//}
-
+                    Console.WriteLine("Aby dodać do listy utworzone zadanie, wpisz \"add\"");
+                    //Console.WriteLine("Aby dodać kolejne zadanie, wpisz \"dodaj\"");
+                    if (Console.ReadLine() == "add")
+                    {
+                        AddTask(afterCheck);
+                        Console.WriteLine("Zadanie zostało dodane do listy zadań");
+                        Console.WriteLine("Jeżeli chcesz wyświetlić listę zadań wpisz\"show\"");
+                        if (Console.ReadLine() == "show")
+                        {
+                            Show.ShowTask(taskList);
+                        }
+                    }
                 }
+
+                if (start == "exit")
+                {
+                    return;
+                }
+
+
             } while (true);
         }
+
+
+        public static void AddTask(string newTask)
+        {
+                string[] testField = newTask.Split(';');
+
+                TaskModel taskModel = new TaskModel(testField[0], testField[1], testField[2], testField[3], testField[4]);
+
+                taskList.Add(taskModel);
+
+        }
+
+        
     }
 }
+
+                
+           
 
         
