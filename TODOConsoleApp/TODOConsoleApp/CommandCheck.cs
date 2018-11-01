@@ -39,8 +39,8 @@ public static class CommandCheck
                 if (everyElement[2] == "tak")
                 {
                     elements1[2] = "";
-                    elements1[3] = "true";
-                    elements1[4] = "true";
+                    elements1.Add("true");
+                    elements1.Add("true");
                     
                     StringBuilder sb = new StringBuilder();
                     sb.Append(elements1[0] + ";");

@@ -3,7 +3,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace TODOConsoleApp
 {
-    class TaskModel
+    public class TaskModel
     {
         private string _descryption;
         private DateTime _startDate;
@@ -14,11 +14,33 @@ namespace TODOConsoleApp
         public TaskModel(string descryption, string startDate, string endDate, string allDayTask, string importantTask )
         {
             Descryption = descryption;
-            StartDate = DateTime.Parse(startDate);
-            EndDate = DateTime.Parse(endDate);
-            AllDayTask = bool.Parse(allDayTask);
-            ImportantTask = bool.Parse(importantTask);
-
+            StartDate  = DateTime.Parse(startDate);
+            if (endDate == "")
+            {
+                AllDayTask = true;
+                if (importantTask == "true")
+                {
+                    ImportantTask = true;
+                }
+                else
+                {
+                    ImportantTask = false;
+                }
+            }
+            else
+            {
+                EndDate = DateTime.Parse(endDate);
+                AllDayTask = false;
+                if (importantTask == "true")
+                {
+                    ImportantTask = true;
+                }
+                else
+                {
+                    ImportantTask = false;
+                }
+            }
+            
         }
 
         public string Descryption { get; set; }

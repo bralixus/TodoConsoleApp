@@ -5,7 +5,7 @@ namespace TODOConsoleApp
 {
     public static class Show
     {
-        private static void ShowTask(List<TaskModel> taskList)
+        public static void ShowTask(List<TaskModel> taskList)
         {
 
             Console.WriteLine("Twoje zadania:");
@@ -20,9 +20,9 @@ namespace TODOConsoleApp
 
         public static void ShowTask(string opis, string start, string koniec, string zakres, string waga)
         {
-            Console.Write(opis.PadLeft(15));
+            Console.Write(opis.PadLeft(30));
             Console.Write(" |");
-            Console.Write(start.PadLeft(30));
+            Console.Write(start.PadLeft(10));
             Console.Write(" |");
             Console.Write(koniec.PadLeft(10));
             Console.WriteLine(" |");
