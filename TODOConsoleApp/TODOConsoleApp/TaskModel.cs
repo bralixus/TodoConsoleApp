@@ -18,6 +18,7 @@ namespace TODOConsoleApp
             if (endDate == "")
             {
                 AllDayTask = true;
+                //EndDate = 
                 if (importantTask == "true")
                 {
                     ImportantTask = true;

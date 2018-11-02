@@ -18,99 +18,83 @@ namespace TODOConsoleApp
 
         static void Main(string[] args)
         {
+            string command = "";
             Console.WriteLine("MENEDŻER ZADAŃ TODO");
             Console.WriteLine();
+
             do
             {
-                Console.WriteLine("Jeśli chcesz dodać nowe zadanie, wpisz \"dodaj\"");
+                Console.WriteLine("Jeśli chcesz dodać nowe zadanie, wpisz \"add\"");
                 Console.WriteLine("Jeśli chcesz opuścić program, wpisz \"exit\"");
-                
-                if (Console.ReadLine() == "dodaj")
+                command = Console.ReadLine();
+                if (command == "add")
                 {
                     Console.WriteLine("Wpisz nowe zadanie (opis;początek(rrrr.mm.dd);koniec(rrrr.mm.dd); wpisz \"tak\" jeżeli zadanie jest ważne ");
                     string element = Console.ReadLine();
                     string afterCheck = CommandCheck.elements(element.Trim(';', ' ', '=', '-', '.'));
-
-                    Console.WriteLine("Aby dodać do listy utworzone zadanie, wpisz \"add\"");
-                    
-                    if (Console.ReadLine() == "add")
-                    {
-                        AddTask(afterCheck);
-                        Console.WriteLine("Zadanie zostało dodane do listy zadań");
-                        Console.WriteLine();
-                        Console.WriteLine("Aby dodać kolejne zadanie, wpisz \"dodaj\"");
-                        Console.WriteLine("Jeżeli chcesz usunąć zadanie, wpisz \"remove\"");
-                        if (Console.ReadLine() == "dodaj")
-                        {
-                            return;//jak wrócić do dodawania zadań
-                        }
-                        if (Console.ReadLine() == "remove")
-                        {
-                            RemoveTask();
-                        }
-                        Console.WriteLine("Jeżeli chcesz wyświetlić listę zadań wpisz\"show\"");
-                        if (Console.ReadLine() == "show")
-                        {
-                            int i = 1;
-                            foreach (var taskModel in taskList)
-                            {
-                                Console.WriteLine($"{i}. {taskModel}");
-                                i++;
-                            }
-                            
-                            Console.WriteLine();
-                            Console.WriteLine("Aby zapisać zadanie wpisz\"save\"");
-                            if (Console.ReadLine() == "save")
-                            {
-                                SaveTask();
-                                Console.WriteLine("Aby wyświetlić zapisane zadania, wpisz\"load\"");
-                                if (Console.ReadLine() == "load")
-                                {
-                                    LoadTask();
-                                }
-
-                                return;
-                            }
-                            
-                        }
-
-                    }
-                    Console.WriteLine("Błędna komenda");
+                    AddTask(afterCheck);
+                    Console.WriteLine("Zadanie zostało dodane do listy zadań");
+                    Console.WriteLine();
+                    Console.WriteLine("Jeżeli chcesz wyświetlić listę zadań wpisz \"show\"");
+                    Console.WriteLine("Jeżeli chcesz usunąć zadanie, wpisz \"remove\"");
+                }
+                else if (command == "remove")
+                {
+                    RemoveTask();
+                    Console.WriteLine("Zadanie zostało usunięte");
                 }
 
-                if (Console.ReadLine() == "exit")
+                else if (command == "show")
+                {
+                    Show.ShowTask(taskList);
+                    
+                }
+
+                else if (command == "save")
+
+                {
+                    SaveTask();
+                    Console.WriteLine("Zadanie zostało zapisane");
+                    Console.WriteLine("Aby wyświetlić zapisane zadania, wpisz \"load\"");
+
+                }
+                else if (command == "load")
+                {
+                    LoadTask();
+                }
+
+                else if (command == "exit")
                 {
                     return;
                 }
 
-
-            } while (true);
+            } while (command != "exit");
         }
 
 
         public static void AddTask(string newTask)
         {
-                string[] testField = newTask.Split(';');
+            string[] testField = newTask.Split(' ');
 
-                TaskModel taskModel = new TaskModel(testField[0], testField[1], testField[2], testField[3], testField[4]);
+            TaskModel taskModel = new TaskModel(testField[0], testField[1], testField[2], testField[3], testField[4]);
 
-                taskList.Add(taskModel);
+            taskList.Add(taskModel);
 
         }
 
         public static void RemoveTask()
         {
             int i = 1;
-            foreach (var taksModel in taskList)
+            foreach (var taskModel in taskList)
             {
-                Console.WriteLine($"{i}. {taksModel}");
+                Console.WriteLine($"{i}. {taskModel.Descryption} {taskModel.StartDate} {taskModel.EndDate} {taskModel.AllDayTask} {taskModel.ImportantTask}");
                 i++;
             }
 
             Console.Write("Wpisz numer zadania do usunięcia:");
             if (int.Parse(Console.ReadLine()) <= taskList.Count)
             {
-                taskList.RemoveAt(int.Parse(Console.ReadLine() +1));
+                taskList.RemoveAt(int.Parse(Console.ReadLine() + 1));
                 Console.WriteLine("Zadanie zostało usunięte");
             }
 
@@ -122,7 +106,7 @@ namespace TODOConsoleApp
             foreach (TaskModel taskmodel in taskList)
             {
                 string taskModel = taskmodel.ToString();
-                string[] everyElement = taskModel.Split(';');
+                string[] everyElement = taskModel.Split(' ');
                 File.WriteAllLines(path, everyElement);
 
             }
@@ -131,14 +115,13 @@ namespace TODOConsoleApp
         public static void LoadTask()
         {
             string path = @"data.csv";
-            bool exist = File.Exists(path);
-            if (exist == true)
+            if (File.Exists(path))
             {
                 string[] savedTasks = File.ReadAllLines(path);
-                foreach (var savedtask in savedTasks)
+                foreach (string savedtask in savedTasks)
                 {
-                    savedtask.Replace(",", ";");
-                    //taskList.Add(savedtask);//Co wpisać, aby dodało się do listy
+                    string loadedTask = savedtask.Replace(',', ' ');
+                    AddTask(loadedTask);
                 }
             }
 
@@ -146,11 +129,11 @@ namespace TODOConsoleApp
         }
 
 
-        
+
     }
 }
 
-                
-           
 
-        
+
+
+
