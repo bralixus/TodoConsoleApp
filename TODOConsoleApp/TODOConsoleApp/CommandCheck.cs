@@ -25,11 +25,11 @@ public static class CommandCheck
                 elements1.Add("true");
                 elements1.Add("");
                 StringBuilder sb = new StringBuilder();
-                sb.Append(elements1[0] + " ");
-                sb.Append(elements1[1] + " ");
-                sb.Append(elements1[2] + " ");
-                sb.Append(elements1[3] + " ");
-                sb.Append(elements1[4] + " ");
+                sb.Append(elements1[0] + ";");
+                sb.Append(elements1[1] + ";");
+                sb.Append(elements1[2] + ";");
+                sb.Append(elements1[3] + ";");
+                sb.Append(elements1[4] + ";");
                 return sb.ToString();
 
             }
@@ -43,11 +43,11 @@ public static class CommandCheck
                     elements1.Add("true"); 
                     
                     StringBuilder sb = new StringBuilder();
-                    sb.Append(elements1[0] + " ");
-                    sb.Append(elements1[1] + " ");
-                    sb.Append(elements1[2] + " ");
-                    sb.Append(elements1[3] + " ");
-                    sb.Append(elements1[4] + " ");
+                    sb.Append(elements1[0] + ";");
+                    sb.Append(elements1[1] + ";");
+                    sb.Append(elements1[2] + ";");
+                    sb.Append(elements1[3] + ";");
+                    sb.Append(elements1[4] + ";");
                     return sb.ToString();
                 }
                 else
@@ -60,11 +60,11 @@ public static class CommandCheck
                         elements1.Add("");
                         elements1.Add("");
                         StringBuilder sb = new StringBuilder();
-                        sb.Append(elements1[0] + " ");
-                        sb.Append(elements1[1] + " ");
-                        sb.Append(elements1[2] + " ");
-                        sb.Append(elements1[3] + " ");
-                        sb.Append(elements1[4] + " ");
+                        sb.Append(elements1[0] + ";");
+                        sb.Append(elements1[1] + ";");
+                        sb.Append(elements1[2] + ";");
+                        sb.Append(elements1[3] + ";");
+                        sb.Append(elements1[4] + ";");
                         return sb.ToString();
                     }
                 }
@@ -83,11 +83,11 @@ public static class CommandCheck
                     elements1[3] = "";
                     elements1.Add("true");
                     StringBuilder sb = new StringBuilder();
-                    sb.Append(elements1[0] + " ");
-                    sb.Append(elements1[1] + " ");
-                    sb.Append(elements1[2] + " ");
-                    sb.Append(elements1[3] + " ");
-                    sb.Append(elements1[4] + " ");
+                    sb.Append(elements1[0] + ";");
+                    sb.Append(elements1[1] + ";");
+                    sb.Append(elements1[2] + ";");
+                    sb.Append(elements1[3] + ";");
+                    sb.Append(elements1[4] + ";");
                     return sb.ToString();
                 }
                 return ("Błędny format daty zakończenia");

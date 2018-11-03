@@ -10,7 +10,7 @@ namespace TODOConsoleApp
 
             Console.WriteLine("Twoje zadania:");
             ShowTask1("Opis", "Data Rozpoczęcia", "Data Zakończenia", "Zadanie całodniowe", "Ważność zadania");
-            Console.WriteLine("".PadLeft(61, '-'));
+            Console.WriteLine("".PadLeft(104, '-'));
             foreach (TaskModel taskModel in taskList)
             {
                 ShowTask1(taskModel.Descryption, taskModel.StartDate.ToString(), taskModel.EndDate.ToString(),
@@ -22,13 +22,13 @@ namespace TODOConsoleApp
         {
             Console.Write(opis.PadLeft(15));
             Console.Write(" |");
-            Console.Write(start.PadLeft(10));
+            Console.Write(start.PadLeft(19));
             Console.Write(" |");
-            Console.Write(koniec.PadLeft(10));
+            Console.Write(koniec.PadLeft(19));
             Console.Write(" |");
-            Console.Write(zakres.PadLeft(5));
+            Console.Write(zakres.PadLeft(20));
             Console.Write(" |");
-            Console.Write(waga.PadLeft(5));
+            Console.Write(waga.PadLeft(20));
             Console.Write(" |");
             Console.WriteLine();
         }

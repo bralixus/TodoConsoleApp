@@ -35,8 +35,9 @@ namespace TODOConsoleApp
                     AddTask(afterCheck);
                     Console.WriteLine("Zadanie zostało dodane do listy zadań");
                     Console.WriteLine();
-                    Console.WriteLine("Jeżeli chcesz wyświetlić listę zadań wpisz \"show\"");
+                    Console.WriteLine("Dostępne komendy: Jeżeli chcesz wyświetlić listę zadań wpisz \"show\"");
                     Console.WriteLine("Jeżeli chcesz usunąć zadanie, wpisz \"remove\"");
+                    Console.WriteLine("Jeżeli chcesz zapisać zadanie do pliku, wpisz \"save\"");
                 }
                 else if (command == "remove")
                 {
@@ -74,7 +75,7 @@ namespace TODOConsoleApp
 
         public static void AddTask(string newTask)
         {
-            string[] testField = newTask.Split(' ');
+            string[] testField = newTask.Split(';');
 
             TaskModel taskModel = new TaskModel(testField[0], testField[1], testField[2], testField[3], testField[4]);
 
