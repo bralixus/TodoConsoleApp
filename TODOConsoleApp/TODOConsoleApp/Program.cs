@@ -19,7 +19,7 @@ namespace TODOConsoleApp
         static void Main(string[] args)
         {
             string command = "";
-            Console.WriteLine("MENEDŻER ZADAŃ TODO");
+            ConsoleEx.WriteLine("MENEDŻER ZADAŃ TODO", ConsoleColor.Cyan);
             Console.WriteLine();
 
             do
@@ -33,16 +33,16 @@ namespace TODOConsoleApp
                     string element = Console.ReadLine();
                     string afterCheck = CommandCheck.elements(element.Trim(';', ' ', '=', '-', '.'));
                     AddTask(afterCheck);
-                    Console.WriteLine("Zadanie zostało dodane do listy zadań");
+                    ConsoleEx.WriteLine("Zadanie zostało dodane do listy zadań", ConsoleColor.Blue);
                     Console.WriteLine();
-                    Console.WriteLine("Dostępne komendy: Jeżeli chcesz wyświetlić listę zadań wpisz \"show\"");
+                    ConsoleEx.WriteLine("Dostępne komendy: Jeżeli chcesz wyświetlić listę zadań wpisz \"show\"",ConsoleColor.Green);
                     Console.WriteLine("Jeżeli chcesz usunąć zadanie, wpisz \"remove\"");
                     Console.WriteLine("Jeżeli chcesz zapisać zadanie do pliku, wpisz \"save\"");
                 }
                 else if (command == "remove")
                 {
                     RemoveTask();
-                    Console.WriteLine("Zadanie zostało usunięte");
+                    ConsoleEx.WriteLine("Zadanie zostało usunięte", ConsoleColor.Blue);
                 }
 
                 else if (command == "show")
@@ -55,7 +55,7 @@ namespace TODOConsoleApp
 
                 {
                     SaveTask();
-                    Console.WriteLine("Zadanie zostało zapisane");
+                    ConsoleEx.WriteLine("Zadanie zostało zapisane", ConsoleColor.Blue);
                     Console.WriteLine("Aby wyświetlić zapisane zadania, wpisz \"load\"");
 
                 }
@@ -76,11 +76,22 @@ namespace TODOConsoleApp
         public static void AddTask(string newTask)
         {
             string[] testField = newTask.Split(';');
-
+            List<TaskModel> notImportant = new List<TaskModel>();
             TaskModel taskModel = new TaskModel(testField[0], testField[1], testField[2], testField[3], testField[4]);
 
-            taskList.Add(taskModel);
+            if (testField[4] != null)
+            {
+                taskList.Add(taskModel);
+            }
+            else
+            {
+                notImportant.Add(taskModel);
+            }
 
+            foreach (var tas in notImportant)
+            {
+                taskList.Add(tas);
+            }
         }
 
         public static void RemoveTask()
@@ -92,14 +103,14 @@ namespace TODOConsoleApp
                 i++;
             }
 
-            Console.Write("Wpisz numer zadania do usunięcia:");
+            ConsoleEx.Write("Wpisz numer zadania do usunięcia:", ConsoleColor.Blue);
             if (int.Parse(Console.ReadLine()) <= taskList.Count)
             {
                 taskList.RemoveAt(int.Parse(Console.ReadLine() + 1));
-                Console.WriteLine("Zadanie zostało usunięte");
+                ConsoleEx.WriteLine("Zadanie zostało usunięte", ConsoleColor.Blue);
             }
 
-            Console.WriteLine("Brak zadania o takim numerze");
+            ConsoleEx.WriteLine("Brak zadania o takim numerze", ConsoleColor.Red);
         }
         public static void SaveTask()
         {
@@ -126,7 +137,7 @@ namespace TODOConsoleApp
                 }
             }
 
-            Console.WriteLine("Brak wskazanego pliku");
+            ConsoleEx.WriteLine("Brak wskazanego pliku",ConsoleColor.Red);
         }
 
 
